@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    background:linear-gradient(135deg,#e9f5ef,#cfe8d9);
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* HEADER */
+.app-header{
+    background:#1b4332;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-weight:600;
+}
+
+/* CARD */
+.card-app{
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    max-width:420px;
+    width:100%;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    animation:fadeUp 0.5s ease;
+}
+
+/* IMAGE */
+#resultImg{
+    width:100%;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+/* LABEL */
+#label{
+    font-weight:700;
+    color:#1b4332;
+}
+
+/* CONFIDENCE */
+#confidence{
+    font-size:14px;
+    color:#555;
+}
+
+/* PROGRESS BAR */
+.progress{
+    height:8px;
+    border-radius:10px;
+    margin-top:5px;
+}
+
+/* BUTTON */
+.btn-main{
+    background:#2d6a4f;
+    color:white;
+    border:none;
+}
+
+.btn-main:hover{
+    background:#1b4332;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="app-header">Hasil Analisis</header>
+
+<div class="container d-flex justify-content-center">
+
+<div class="card-app text-center">
+
+    <!-- IMAGE -->
+    <img id="resultImg">
+
+    <!-- RESULT -->
+    <h2 id="label"></h2>
+    <p id="confidence"></p>
+
+    <!-- STATUS -->
+    <div id="statusBox" class="mb-3"></div>
+
+    <!-- DETAIL -->
+    <div class="text-start">
+        <h6 class="mb-2">Distribusi Probabilitas</h6>
+        <div id="detail"></div>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="btn btn-dark w-100 mt-3" onclick="exportPDF()">
+        📄 Export Laporan PDF
+    </button>
+
+    <button class="btn btn-outline-success w-100 mt-2" onclick="back()">
+        🔁 Analisis Lagi
+    </button>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
