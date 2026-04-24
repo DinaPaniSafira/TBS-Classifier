@@ -23,58 +23,16 @@ if(document.getElementById("emptyState")){
 // ======================
 // LOAD MODEL
 // ======================
-let model;
-
-async function loadModel() {
-    try {
-        model = await tf.loadGraphModel(
-            'https://soft-axolotl-4361d1.netlify.app/model.json'
-        );
-        console.log("✅ Model Loaded");
-    } catch (err) {
-        console.error("❌ Model gagal load:", err);
+async function loadModel(){
+    try{
+        console.log("⏳ Loading model...");
+        model = await tf.loadGraphModel("tfjs_model/model.json");
+        console.log("✅ Model siap");
+    }catch(err){
+        console.error(err);
+        alert("❌ Model gagal load");
     }
 }
-
-function preprocessImage(image) {
-    return tf.browser.fromPixels(image)
-        .resizeNearestNeighbor([224, 224])
-        .toFloat()
-        .div(255.0)
-        .expandDims();
-}
-
-async function predict() {
-    if (!model) {
-        alert("Model belum siap");
-        return;
-    }
-
-    const fileInput = document.getElementById('imageUpload');
-    const resultText = document.getElementById('result');
-
-    if (fileInput.files.length === 0) {
-        alert("Upload gambar dulu!");
-        return;
-    }
-
-    const file = fileInput.files[0];
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
-
-    img.onload = async () => {
-        const tensor = preprocessImage(img);
-
-        const prediction = model.execute(tensor);
-        const data = await prediction.data();
-
-        const classes = ["Belum Masak", "Masak", "Terlalu Masak"];
-        const maxIndex = data.indexOf(Math.max(...data));
-
-        resultText.innerText = "Hasil: " + classes[maxIndex];
-    };
-}
-
 loadModel();
 
 // ======================
@@ -476,7 +434,7 @@ async function exportPDF(){
     // FOOTER
     // =========================
     doc.setFontSize(9);
-    doc.text("Palm AI Scanner - Sistem Deteksi Kematangan TBS Sawit", margin, 285);
+    doc.text("TBS Classifier - Sistem Klasifikasi Kematangan TBS Sawit", margin, 285);
     doc.text("Halaman 1", pageW - 30, 285);
 
     // =========================
