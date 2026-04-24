@@ -26,7 +26,9 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("⏳ Loading model...");
-        model = await tf.loadGraphModel('https://delicate-caramel-178417.netlify.app/model.json');
+        model = await tf.loadLayersModel(
+  'https://soft-axolotl-4361d1.netlify.app/model.json'
+);
         console.log("✅ Model siap");
     }catch(err){
         console.error(err);
