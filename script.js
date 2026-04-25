@@ -39,14 +39,15 @@ async function loadModel(){
     try{
         console.log("START LOAD");
 
-        model = await tf.loadGraphModel("model.json");
-        );
+        model = await tf.loadGraphModel("./model.json");
+
+        console.log("MODEL:", model);
 
         if(!model){
             throw new Error("Model null");
         }
 
-        modelReady = true; // 🔥 INI WAJIB
+        modelReady = true;
 
         console.log("SELESAI LOAD");
 
