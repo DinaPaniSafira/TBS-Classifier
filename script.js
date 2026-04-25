@@ -1,3 +1,4 @@
+
 let imageData = null;
 let stream = null;
 let model = null;
@@ -143,10 +144,12 @@ async function analyze(){
         alert("⚠️ Pilih gambar dulu");
         return;
     }
+
     if(!modelReady){
-    alert("⏳ Model masih loading, tunggu dulu...");
-    return;
-}
+        alert("⏳ Model masih loading, tunggu dulu...");
+        return;
+    }
+
     const loading = document.getElementById("loading");
     loading.style.display = "flex";
 
@@ -155,66 +158,60 @@ async function analyze(){
         img.crossOrigin = "anonymous";
         img.src = imageData;
 
+        // 🔥 FIX WAJIB (HP)
         await new Promise((resolve, reject) => {
-    img.onload = resolve;
-    img.onerror = reject;
-});
+            img.onload = resolve;
+            img.onerror = reject;
+        });
 
-            try{
-                // ======================
-                // PREPROCESS
-                // ======================
-                const tensor = tf.browser.fromPixels(img)
-                    .resizeNearestNeighbor([224,224])
-                    .toFloat()
-                    .div(255)
-                    .expandDims();
+        // ======================
+        // PREPROCESS
+        // ======================
+        const tensor = tf.browser.fromPixels(img)
+            .resizeNearestNeighbor([224,224])
+            .toFloat()
+            .div(255)
+            .expandDims();
 
-                const pred = model.predict(tensor);
-                const data = Array.from(await pred.data());
+        const pred = model.predict(tensor);
+        const data = Array.from(await pred.data());
 
-                // ======================
-                // VALIDASI TBS
-                // ======================
-                if(!isPalmLikely(data)){
-                    loading.style.display="none";
-                    alert("❌ Bukan gambar TBS");
-                    return;
-                }
+        // ======================
+        // VALIDASI
+        // ======================
+        if(!isPalmLikely(data)){
+            loading.style.display="none";
+            alert("❌ Bukan gambar TBS");
+            return;
+        }
 
-                // ======================
-                // 🔥 COMPRESS IMAGE (FIX UTAMA)
-                // ======================
-                let compressed;
-                try{
-                    compressed = await compressImage(imageData, 0.7, 500);
-                }catch(e){
-                    console.warn("Compress gagal, pakai original");
-                    compressed = imageData;
-                }
+        // ======================
+        // COMPRESS (AMAN HP)
+        // ======================
+        let compressed;
+        try{
+            compressed = await compressImage(imageData, 0.7, 500);
+        }catch(e){
+            console.warn("Compress gagal");
+            compressed = imageData;
+        }
 
-                // ======================
-                // SIMPAN DATA
-                // ======================
-                sessionStorage.setItem("img", compressed);
-                sessionStorage.setItem("res", JSON.stringify(data));
+        // ======================
+        // SIMPAN
+        // ======================
+        sessionStorage.setItem("img", compressed);
+        sessionStorage.setItem("res", JSON.stringify(data));
 
-                // ======================
-                // HIDE LOADING
-                // ======================
-                loading.style.display="none";
+        loading.style.display="none";
 
-                // ======================
-                // REDIRECT
-                // ======================
-                window.location.href="result.html";
+        window.location.href="result.html";
 
-            }catch(err){
-                console.error("Error proses:", err);
-                loading.style.display="none";
-                alert("❌ Gagal proses gambar");
-            }
-        };
+    }catch(err){
+        console.error("ERROR ANALYZE:", err);
+        loading.style.display="none";
+        alert("❌ Gagal analisis");
+    }
+}
 
         // 🔥 ERROR HANDLING GAMBAR
         img.onerror = ()=>{
