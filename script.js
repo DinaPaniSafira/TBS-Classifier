@@ -173,7 +173,7 @@ async function analyze(){
     const loading = document.getElementById("loading");
     loading.style.display = "flex";
     document.getElementById("loadingText").innerText =
-        "🔍 Menganalisis gambar...";
+        "Menganalisis gambar...";
 
     try{
         const img = new Image();
@@ -366,7 +366,7 @@ async function exportPDF(){
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
-    doc.text("LAPORAN ANALISIS TBS SAWIT", margin, 15);
+    doc.text("LAPORAN ANALISIS TBS KELAPA SAWIT", margin, 15);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
@@ -453,7 +453,7 @@ async function exportPDF(){
     // FOOTER
     // =========================
     doc.setFontSize(9);
-    doc.text("TBS Classifier - Sistem Klasifikasi Kematangan TBS Sawit", margin, 285);
+    doc.text("TBS Classifier - Sistem Klasifikasi Kematangan TBS Kelapa Sawit", margin, 285);
     doc.text("Halaman 1", pageW - 30, 285);
 
     // =========================
