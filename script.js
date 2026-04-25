@@ -38,14 +38,21 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("START LOAD");
-console.log("MODEL:", model);
-  model = await tf.loadGraphModel(
-  "https://raw.githubusercontent.com/DinaPaniSafira/TBS-Classifier/main/model.json"
-);
+
+        model = await tf.loadGraphModel(
+            "https://cdn.jsdelivr.net/gh/DinaPaniSafira/TBS-Classifier@main/model.json"
+        );
+
+        if(!model){
+            throw new Error("Model null");
+        }
+
+        modelReady = true; // 🔥 INI WAJIB
+
         console.log("SELESAI LOAD");
 
     }catch(err){
-        console.error("ERROR:", err);
+        console.error("ERROR LOAD MODEL:", err);
         alert("❌ Model gagal load");
     }
 }
