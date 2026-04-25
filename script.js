@@ -19,7 +19,8 @@ function show(id){
 if(document.getElementById("emptyState")){
     show("emptyState");
 }
-
+tf.setBackend('webgl');
+await tf.ready();
 // ======================
 // LOAD MODEL
 // ======================
@@ -28,7 +29,9 @@ async function loadModel(){
        console.log("START LOAD");
 
 model = await tf.loadGraphModel(
-  "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
+  tf.io.browserHTTPRequest(
+    "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
+  )
 );
 console.log("SELESAI LOAD");
     }catch(err){
