@@ -27,15 +27,9 @@ async function loadModel(){
     try{
         console.log("START LOAD");
 
-        await tf.setBackend('webgl');
-        await tf.ready();
-
-        model = await tf.loadGraphModel(
-          tf.io.browserHTTPRequest(
-            "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
-          )
-        );
-
+       model = await tf.loadGraphModel(
+  "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json?download=1"
+);
         console.log("SELESAI LOAD");
 
     }catch(err){
