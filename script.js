@@ -1,6 +1,18 @@
 let imageData = null;
 let stream = null;
 let model = null;
+let modelReady = false;
+
+// 🔥 FIX LOADING & MOBILE INIT
+document.addEventListener("DOMContentLoaded", ()=>{
+    const loading = document.getElementById("loading");
+    if(loading) loading.style.display = "none";
+});
+document.addEventListener("click", function(e){
+    if(e.target.tagName === "BUTTON"){
+        e.target.blur();
+    }
+});
 
 // 🔥 LOGO BASE64 (WAJIB DIISI)
 const LOGO = "PASTE_BASE64_LOGO_DI_SINI";
@@ -26,11 +38,15 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("START LOAD");
-console.log("MODEL:", model);
-  model = await tf.loadGraphModel(
+
+model = await tf.loadGraphModel(
   "https://raw.githubusercontent.com/DinaPaniSafira/TBS-Classifier/main/model.json"
 );
-        console.log("SELESAI LOAD");
+
+console.log("MODEL:", model); // 🔥 pindah ke sini
+modelReady = true;
+
+console.log("SELESAI LOAD");
 
     }catch(err){
         console.error("ERROR:", err);
@@ -69,7 +85,11 @@ async function startCamera(){
     show("cameraState");
 
     try{
-        stream = await navigator.mediaDevices.getUserMedia({video:true});
+       stream = await navigator.mediaDevices.getUserMedia({
+    video: {
+        facingMode: { ideal: "environment" }
+    }
+});
         document.getElementById("video").srcObject = stream;
     }catch{
         alert("Kamera tidak tersedia");
@@ -123,7 +143,7 @@ async function analyze(){
         return;
     }
 
-    if(!model){
+    if(!modelReady){
         alert("❌ Model belum siap");
         return;
     }
@@ -133,6 +153,7 @@ async function analyze(){
 
     try{
         const img = new Image();
+        img.crossOrigin = "anonymous";
         img.src = imageData;
 
         img.onload = async ()=>{
