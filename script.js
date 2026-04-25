@@ -38,22 +38,18 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("START LOAD");
-
-model = await tf.loadGraphModel(
+console.log("MODEL:", model);
+  model = await tf.loadGraphModel(
   "https://raw.githubusercontent.com/DinaPaniSafira/TBS-Classifier/main/model.json"
 );
-
-console.log("MODEL:", model); // 🔥 pindah ke sini
-modelReady = true;
-
-console.log("SELESAI LOAD");
+        console.log("SELESAI LOAD");
 
     }catch(err){
         console.error("ERROR:", err);
         alert("❌ Model gagal load");
     }
 }
-loadModel();
+loadModel()
 
 // ======================
 // UPLOAD
