@@ -25,13 +25,13 @@ if(document.getElementById("emptyState")){
 // ======================
 async function loadModel(){
     try{
-        console.log("⏳ Loading model...");
+       console.log("START LOAD");
 
-        model = await tf.loadGraphModel(
-          "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
-        );
+model = await tf.loadGraphModel(
+  "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
+);
 
-        console.log("✅ Model siap");
+console.log("SELESAI LOAD");
     }catch(err){
         console.error("ERROR:", err);
         alert("❌ Model gagal load");
