@@ -39,17 +39,19 @@ async function loadModel(){
     try{
         console.log("START LOAD");
 
-        model = await tf.loadGraphModel("./model.json");
+        alert("⏳ Sedang memuat AI model...\nTunggu beberapa detik");
+
+        model = await tf.loadGraphModel(
+          "https://cdn.jsdelivr.net/gh/DinaPaniSafira/TBS-Classifier@main/model.json"
+        );
 
         console.log("MODEL:", model);
-
-        if(!model){
-            throw new Error("Model null");
-        }
 
         modelReady = true;
 
         console.log("SELESAI LOAD");
+
+        alert("✅ Model siap digunakan");
 
     }catch(err){
         console.error("ERROR LOAD MODEL:", err);
@@ -147,10 +149,9 @@ async function analyze(){
     }
 
     if(!modelReady){
-        alert("❌ Model belum siap");
-        return;
-    }
-
+    alert("⏳ Model masih loading, tunggu dulu...");
+    return;
+}
     const loading = document.getElementById("loading");
     loading.style.display = "flex";
 
