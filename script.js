@@ -26,12 +26,14 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("⏳ Loading model...");
-        const model = await tf.loadLayersModel(
-  "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
-);
+
+        model = await tf.loadGraphModel(
+          "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
+        );
+
         console.log("✅ Model siap");
     }catch(err){
-        console.error(err);
+        console.error("ERROR:", err);
         alert("❌ Model gagal load");
     }
 }
@@ -145,7 +147,7 @@ async function analyze(){
                     .div(255)
                     .expandDims();
 
-                const pred = model.execute(tensor);
+                const pred = model.predict(tensor);
                 const data = Array.from(await pred.data());
 
                 // ======================
