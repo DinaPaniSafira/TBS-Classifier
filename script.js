@@ -212,20 +212,6 @@ async function analyze(){
         alert("❌ Gagal analisis");
     }
 }
-
-        // 🔥 ERROR HANDLING GAMBAR
-        img.onerror = ()=>{
-            loading.style.display="none";
-            alert("❌ Gambar gagal dibaca");
-        };
-
-    }catch(err){
-        console.error(err);
-        loading.style.display="none";
-        alert("❌ Error analisis");
-    }
-}
-
 // ======================
 // RESULT PAGE
 // ======================
