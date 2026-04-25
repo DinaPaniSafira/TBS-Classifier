@@ -139,16 +139,12 @@ button, .btn {
 * {
     -webkit-tap-highlight-color: transparent;
 }
-html, body {
+button, .btn {
     touch-action: manipulation;
 }
 
 body {
     min-height: 100dvh;
-}
-
-div[style*="position: absolute"] {
-    pointer-events: none;
 }
 
 button {
