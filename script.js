@@ -19,21 +19,25 @@ function show(id){
 if(document.getElementById("emptyState")){
     show("emptyState");
 }
-tf.setBackend('webgl');
-await tf.ready();
+
 // ======================
 // LOAD MODEL
 // ======================
 async function loadModel(){
     try{
-       console.log("START LOAD");
+        console.log("START LOAD");
 
-model = await tf.loadGraphModel(
-  tf.io.browserHTTPRequest(
-    "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
-  )
-);
-console.log("SELESAI LOAD");
+        await tf.setBackend('webgl');
+        await tf.ready();
+
+        model = await tf.loadGraphModel(
+          tf.io.browserHTTPRequest(
+            "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
+          )
+        );
+
+        console.log("SELESAI LOAD");
+
     }catch(err){
         console.error("ERROR:", err);
         alert("❌ Model gagal load");
