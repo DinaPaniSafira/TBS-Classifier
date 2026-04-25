@@ -26,10 +26,9 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("START LOAD");
-
+console.log("MODEL:", model);
   model = await tf.loadGraphModel(
-  "https://cdn.jsdelivr.net/gh/DinaPaniSafira/TBS-Classifier@main/model.json",
-  { strict: false }
+  "https://raw.githubusercontent.com/DinaPaniSafira/TBS-Classifier/main/model.json"
 );
         console.log("SELESAI LOAD");
 
