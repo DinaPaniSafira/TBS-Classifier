@@ -143,7 +143,6 @@ async function analyze(){
         alert("⚠️ Pilih gambar dulu");
         return;
     }
-
     if(!modelReady){
     alert("⏳ Model masih loading, tunggu dulu...");
     return;
@@ -156,7 +155,10 @@ async function analyze(){
         img.crossOrigin = "anonymous";
         img.src = imageData;
 
-        img.onload = async ()=>{
+        await new Promise((resolve, reject) => {
+    img.onload = resolve;
+    img.onerror = reject;
+});
 
             try{
                 // ======================
