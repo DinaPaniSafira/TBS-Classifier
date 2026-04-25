@@ -28,38 +28,46 @@ if(document.getElementById("emptyState")){
 }
 
 // ======================
-// LOAD MODEL (FIX TOTAL)
+// LOAD MODEL (STABLE)
 // ======================
 async function loadModel(){
     const loading = document.getElementById("loading");
 
     try{
-        console.log("START LOAD");
-
         loading.style.display = "flex";
         document.getElementById("loadingText").innerText =
             "⏳ Memuat AI model...";
 
-        model = await tf.loadGraphModel(
-          "https://cdn.jsdelivr.net/gh/DinaPaniSafira/TBS-Classifier@main/model.json"
-        );
+        // 🔥 pastikan backend siap (penting di HP)
+        await tf.setBackend('webgl');
+        await tf.ready();
+
+        // 🔥 gunakan base path + modelUrl (lebih aman untuk shard .bin)
+        model = await tf.loadGraphModel({
+            modelUrl: "https://raw.githubusercontent.com/DinaPaniSafira/TBS-Classifier/main/model.json",
+            fromTFHub: false
+        });
+
+        if(!model){
+            throw new Error("Model null");
+        }
 
         modelReady = true;
-
         loading.style.display = "none";
 
-        console.log("SELESAI LOAD");
+        console.log("✅ MODEL SIAP");
 
-        // 🔥 AUTO LANJUT kalau user sudah klik duluan
+        // 🔥 kalau user sudah klik analisis duluan
         if(pendingAnalyze){
             analyze();
             pendingAnalyze = false;
         }
 
     }catch(err){
-        console.error("ERROR LOAD MODEL:", err);
+        console.error("❌ ERROR LOAD MODEL:", err);
         loading.style.display = "none";
-        alert("❌ Model gagal load");
+
+        alert("❌ Model gagal load.\nCoba refresh atau buka di Chrome.");
     }
 }
 loadModel();
