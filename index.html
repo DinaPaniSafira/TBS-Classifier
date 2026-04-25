@@ -10,15 +10,20 @@ body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
     background: radial-gradient(circle at top, #d8f3dc, #95d5b2, #1b4332);
-    height:100vh;
+    
+    min-height:100dvh;
+    
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden;
+
+    overflow-x:hidden;
 }
 
 /* CONTAINER */
 .splash-container{
+    position: relative;
+    z-index: 2;
     text-align:center;
     color:white;
     animation:fadeUp 1s ease;
@@ -55,11 +60,20 @@ body{
     font-weight:600;
     border:none;
     transition:0.3s;
+
+    position: relative;
+    z-index: 10;
 }
 
 .btn-start:hover{
     transform:scale(1.05);
     box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* 🔥 FIX TOUCH */
+button{
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* ANIMATIONS */
@@ -88,6 +102,9 @@ body{
     background:rgba(255,255,255,0.15);
     filter:blur(100px);
     border-radius:50%;
+
+    pointer-events: none;
+    z-index: 0;
 }
 
 .glow1{ top:10%; left:20%; }
