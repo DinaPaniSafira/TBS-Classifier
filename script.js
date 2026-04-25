@@ -26,7 +26,9 @@ if(document.getElementById("emptyState")){
 async function loadModel(){
     try{
         console.log("⏳ Loading model...");
-        model = await tf.loadGraphModel("tfjs_model/model.json");
+        const model = await tf.loadLayersModel(
+  "https://huggingface.co/Dina08/tbs-classifier-model/resolve/main/model.json"
+);
         console.log("✅ Model siap");
     }catch(err){
         console.error(err);
