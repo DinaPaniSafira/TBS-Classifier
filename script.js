@@ -43,10 +43,9 @@ async function loadModel(){
         await tf.ready();
 
         // 🔥 gunakan base path + modelUrl (lebih aman untuk shard .bin)
-        model = await tf.loadGraphModel({
-            modelUrl: "https://raw.githubusercontent.com/DinaPaniSafira/TBS-Classifier/main/model.json",
-            fromTFHub: false
-        });
+       model = await tf.loadGraphModel(
+    "https://cdn.jsdelivr.net/gh/DinaPaniSafira/TBS-Classifier@main/model.json"
+);
 
         if(!model){
             throw new Error("Model null");
