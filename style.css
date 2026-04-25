@@ -1,0 +1,114 @@
+body {
+    font-family: 'Segoe UI';
+}
+
+/* SPLASH */
+.splash-bg {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#e8f5e9,#ffffff);
+}
+
+.splash-container {
+    text-align:center;
+    max-width:300px;
+}
+
+.logo-big {
+    width:120px;
+    margin-bottom:20px;
+}
+
+.title-main {
+    font-weight:700;
+}
+
+.subtitle {
+    color:#666;
+}
+
+/* HEADER */
+.app-header {
+    background:#1b5e20;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+/* CARD */
+.card-app {
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    max-width:350px;
+    width:100%;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* IMAGE */
+#previewImg, #resultImg {
+    width:100%;
+    border-radius:12px;
+}
+
+/* VIDEO */
+video {
+    width:100%;
+    border-radius:12px;
+}
+
+#loading{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(4px);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.loading-content{
+    text-align:center;
+}
+
+/* SPINNER CUSTOM */
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid #ddd;
+    border-top:6px solid #2d6a4f;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+@keyframes spin{
+    100%{transform:rotate(360deg);}
+}
+button:active{
+    transform:scale(0.96);
+}

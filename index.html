@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background: radial-gradient(circle at top, #d8f3dc, #95d5b2, #1b4332);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* CONTAINER */
+.splash-container{
+    text-align:center;
+    color:white;
+    animation:fadeUp 1s ease;
+}
+
+/* LOGO */
+.logo{
+    width:120px;
+    margin-bottom:20px;
+    animation:float 3s ease-in-out infinite;
+}
+
+/* TITLE */
+.title{
+    font-size:36px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+/* SUBTITLE */
+.subtitle{
+    font-size:15px;
+    opacity:0.9;
+    margin-top:10px;
+    margin-bottom:25px;
+}
+
+/* BUTTON */
+.btn-start{
+    background:white;
+    color:#1b4332;
+    padding:12px 30px;
+    border-radius:30px;
+    font-weight:600;
+    border:none;
+    transition:0.3s;
+}
+
+.btn-start:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes float{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-10px); }
+    100%{ transform:translateY(0); }
+}
+
+/* BACKGROUND GLOW */
+.bg-glow{
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(255,255,255,0.15);
+    filter:blur(100px);
+    border-radius:50%;
+}
+
+.glow1{ top:10%; left:20%; }
+.glow2{ bottom:10%; right:20%; }
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-glow glow1"></div>
+<div class="bg-glow glow2"></div>
+
+<div class="splash-container">
+
+    <img src="assets/logo.png" class="logo">
+
+    <div class="title">TBS Classifier</div>
+
+    <div class="subtitle">
+        Klasifikasi kematangan TBS kelapa sawit secara otomatis menggunakan Artificial Intelligence
+    </div>
+
+    <button class="btn-start" onclick="startApp()">
+        Mulai Scan →
+    </button>
+
+</div>
+
+<script>
+function startApp(){
+    window.location.href="upload.html";
+}
+</script>
+
+</body>
+</html>

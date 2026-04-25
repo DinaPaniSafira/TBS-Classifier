@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+<style>
+body{
+    background:linear-gradient(135deg,#e9f5ef,#cfe8d9);
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* HEADER */
+.app-header{
+    background:#1b4332;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+/* CARD */
+.card-app{
+    margin-top:40px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    max-width:400px;
+    width:100%;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    animation:fadeUp 0.5s ease;
+}
+
+/* PREVIEW BOX */
+.preview-box{
+    border:2px dashed #b7e4c7;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:15px;
+    background:#f8fdf9;
+    transition:0.3s;
+}
+
+.preview-box:hover{
+    background:#edf8f1;
+}
+
+.preview-box img{
+    width:100%;
+    border-radius:12px;
+}
+
+/* BUTTON */
+.btn-main{
+    background:#2d6a4f;
+    color:white;
+    border:none;
+}
+
+.btn-main:hover{
+    background:#1b4332;
+}
+
+/* ANIMASI */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="app-header">TBS AI Scanner</header>
+
+<div class="container d-flex justify-content-center">
+
+<div class="card-app">
+
+    <!-- EMPTY -->
+    <div id="emptyState" class="text-center">
+
+        <div class="preview-box">
+            <p class="text-muted mb-0">Belum ada gambar</p>
+        </div>
+
+        <button class="btn btn-outline-success w-100 mb-2" onclick="pickImage()">
+            📁 Upload Gambar
+        </button>
+
+        <button class="btn btn-outline-success w-100" onclick="startCamera()">
+            📷 Gunakan Kamera
+        </button>
+    </div>
+
+    <!-- CAMERA -->
+    <div id="cameraState" class="text-center">
+
+        <div class="preview-box">
+            <video id="video" autoplay></video>
+        </div>
+
+        <button class="btn btn-main w-100 mt-2" onclick="capture()">📸 Ambil Foto</button>
+        <button class="btn btn-outline-secondary w-100 mt-2" onclick="cancelCamera()">Batal</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div id="previewState" class="text-center">
+
+        <div class="preview-box">
+            <img id="previewImg">
+        </div>
+
+        <button class="btn btn-outline-secondary w-100 mt-2" onclick="resetImage()">Ganti / Hapus</button>
+        <button class="btn btn-main w-100 mt-2" onclick="analyze()">🚀 Analisis</button>
+    </div>
+
+    <input type="file" id="fileInput" hidden>
+
+</div>
+</div>
+
+<!-- LOADING -->
+<div id="loading">
+    <div class="loading-content">
+        <div class="spinner"></div>
+        <p id="loadingText">Menganalisis gambar...</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="script.js"></script>
+</body>
+</html>
