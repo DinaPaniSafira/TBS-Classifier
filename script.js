@@ -39,8 +39,6 @@ async function loadModel(){
     try{
         console.log("START LOAD");
 
-        alert("⏳ Sedang memuat AI model...\nTunggu beberapa detik");
-
         model = await tf.loadGraphModel(
           "https://cdn.jsdelivr.net/gh/DinaPaniSafira/TBS-Classifier@main/model.json"
         );
@@ -50,8 +48,6 @@ async function loadModel(){
         modelReady = true;
 
         console.log("SELESAI LOAD");
-
-        alert("✅ Model siap digunakan");
 
     }catch(err){
         console.error("ERROR LOAD MODEL:", err);
